@@ -1,7 +1,3 @@
-.field-form{
-    padding: 5px;
-}
-
 label{
     padding: 5px;
 }
@@ -19,6 +15,15 @@ label{
 
 .btn-reset{
     float: left;
+}
+
+.error{
+    border: 1px solid red;
+    
+}
+
+.field-form{
+    padding: 5px;
 }
 
 form{
