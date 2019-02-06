@@ -1,0 +1,33 @@
+.field-form{
+    padding: 5px;
+}
+
+label{
+    padding: 5px;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 0;
+    margin: 20px;
+}
+
+.btn-save{
+    float: right;
+}
+
+.btn-reset{
+    float: left;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+}
