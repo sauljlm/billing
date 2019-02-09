@@ -48,11 +48,16 @@
     
     cleanClass();
 
+    function updateTotal(total) {
+        
+    }
+
     function addTotal() {
-        const dataTotal = orderBills.forEach(e => {
-            return e;
-        });
-        console.log(dataTotal);
+        let total = 0;
+        for (let i = 0; i < bills.length; i++) {
+            total = total + bills[i].amount;
+        }
+        updateTotal(total);
     }
 
     function orderList() {
@@ -72,7 +77,7 @@
 
     function addBill() {
         divBill.innerHTML= '';
-        for (let i = 0; Bills.length; i++) {
+        for (let i = 0; i < Bills.length; i++) {
             let rowBill = document.createElement('tr');
             let nameBill = document.createElement('td');
             let typeBill = document.createElement('td');
@@ -99,7 +104,7 @@
             this.name = nameValue;
             this.type = typeValue;
             this.date = dateValue;
-            this.amount = amountValue;
+            this.amount = parseInt(amountValue);
         }
     }
 
