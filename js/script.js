@@ -4,29 +4,24 @@
 
     const contBills = document.getElementById('cont-bills');
     const forms = document.querySelectorAll('.field-form');
-
     const data = document.querySelectorAll('.js-data');
-
 
     const dataName = document.getElementById('name');
     const dataAmount = document.getElementById('amount');
     const dataDate = document.getElementById('date');
     const dataType = document.getElementById('type');
 
-
     let bills = [];
-    let error = [];
     let inputs = [];
 
-    cleanClass();
-
-    
+    // crate table
     const table = document.createElement('table');
-    const btnTable = document.createElement('tr');
+    const rowBtn = document.createElement('tr');
     const btnName = document.createElement('th');
     const btnType = document.createElement('th');
     const btnDate = document.createElement('th');
     const btnAmount = document.createElement('th');
+    const divBill = document.createElement('tbody');
 
     btnName.innerHTML = 'Name';
     btnType.innerHTML = 'Type';
@@ -43,32 +38,60 @@
     btnDate.setAttribute('id', 'btn-date');
     btnAmount.setAttribute('id', 'btn-amount');
 
-    table.appendChild(btnName);
-    table.appendChild(btnType);
-    table.appendChild(btnDate);
-    table.appendChild(btnAmount);
-    table.appendChild(btnTable);
+    rowBtn.appendChild(btnName);
+    rowBtn.appendChild(btnType);
+    rowBtn.appendChild(btnDate);
+    rowBtn.appendChild(btnAmount);
+    table.appendChild(rowBtn);
     contBills.appendChild(table);
+    table.appendChild(divBill);
     
+    cleanClass();
 
-    function addBill(index) {
-        const btnTable = document.createElement('tr');
-        const nameBill = document.createElement('td');
-        const typeBill = document.createElement('td');
-        const dateBill = document.createElement('td');
-        const amountBill = document.createElement('td');
+    function addTotal() {
+        const dataTotal = orderBills.forEach(e => {
+            return e;
+        });
+        console.log(dataTotal);
+    }
 
-        nameBill.innerHTML = bills[index].name;
-        typeBill.innerHTML = bills[index].type;
-        dateBill.innerHTML = bills[index].date;
-        amountBill.innerHTML = bills[index].amount;
+    function orderList() {
+        for (let i = 0; i < bills.length; i++){
+            Bills = bills.sort(function (prev, next) {
+                if (prev.name > next.name) {
+                    return 1;
+                }
+                if (prev.name < next.name) {
+                    return -1;
+                }
+                return 0;
+            });
+        }
+        addBill();
+    }
 
-        btnTable.appendChild(nameBill);
-        btnTable.appendChild(typeBill);
-        btnTable.appendChild(dateBill);
-        btnTable.appendChild(amountBill);
-    
-        table.appendChild(btnTable);
+    function addBill() {
+        divBill.innerHTML= '';
+        for (let i = 0; Bills.length; i++) {
+            let rowBill = document.createElement('tr');
+            let nameBill = document.createElement('td');
+            let typeBill = document.createElement('td');
+            let dateBill = document.createElement('td');
+            let amountBill = document.createElement('td');
+
+            nameBill.innerHTML = Bills[i].name;
+            typeBill.innerHTML = Bills[i].type;
+            dateBill.innerHTML = Bills[i].date;
+            amountBill.innerHTML = Bills[i].amount;
+
+            rowBill.appendChild(nameBill);
+            rowBill.appendChild(typeBill);
+            rowBill.appendChild(dateBill);
+            rowBill.appendChild(amountBill);
+
+            divBill.appendChild(rowBill);
+        }
+        addTotal();
     }
 
     class createBill {
@@ -92,10 +115,8 @@
                                             dataDate.value,
                                             dataAmount.value);
         bills.push(newConstructor);
-        console.log(newConstructor);
-        console.log(bills); // bills es el array
         cleanForm();
-        addBill(bills.length - 1);
+        orderList();
     }
     function cleanClass () {
         data.forEach((e) => {
@@ -113,15 +134,11 @@
             if (!((element.value) === '')){
                 return true;
             }else {
-                error.push(element);
                 element.classList.add('error');
                 return false;
             }
         }); 
-        // console.log(valued);
-        // console.log(error);
         inputs = [];
-        error = [];
         if (valued.length === data.length){
             uploadBill();
         }
